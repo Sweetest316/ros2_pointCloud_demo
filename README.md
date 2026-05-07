@@ -45,7 +45,7 @@ python setup.py develop
 
 ---
 
-# 编译 pybind11
+# 编译 
 
 ```bash
 cd ros2_pointCloud
