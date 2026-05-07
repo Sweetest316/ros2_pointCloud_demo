@@ -35,7 +35,6 @@ venv/
 # =========================================================
 OpenPCDet/output/
 OpenPCDet/tools/cfgs/tmp/
-OpenPCDet/data/
 
 # checkpoints
 *.pth

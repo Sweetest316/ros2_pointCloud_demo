@@ -82,7 +82,7 @@ private:
     std::string get_path(int idx)
     {
         std::ostringstream oss;
-        oss << "/mnt/kitti/zjb_public_data/KITTI/testing/velodyne/"
+        oss << "/mnt/kitti/KITTI/testing/velodyne/"
             << std::setw(6) << std::setfill('0') << idx
             << ".bin";
         return oss.str();
