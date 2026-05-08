@@ -77,6 +77,81 @@ ros2 run pointpillar_ros pointpillar_node
 
 ---
 
+
+# ros2bag
+
+项目支持使用 `ros2bag` 对 ROS2 Topic 进行录制与回放。
+
+推荐将 bag 数据统一存放到独立数据目录中：
+
+```bash
+projects/
+├── data/
+│   ├── bags/
+│   │   ├── kitti-pc-demo/
+│   │   └── ...
+```
+
+---
+
+## 录制 PointCloud2 Topic
+
+启动点云发布节点：
+
+```bash
+ros2 run pointpillar_ros pointpillar_sub_node
+```
+
+录制 `/points` topic：
+
+```bash
+ros2 bag record \
+    -o ~/projects/data/bags/kitti-pc-demo \
+    /points
+```
+
+录制完成后按：
+
+```bash
+Ctrl + C
+```
+
+生成：
+
+```bash
+kitti-pc-demo/
+├── metadata.yaml
+├── *.db3
+```
+
+---
+
+## 播放 ros2bag
+
+播放 bag：
+
+```bash
+ros2 bag play ~/projects/data/bags/kitti-pc-demo
+```
+
+循环播放：
+
+```bash
+ros2 bag play \
+    ~/projects/data/bags/kitti-pc-demo \
+    --loop
+```
+
+调整播放速度：
+
+```bash
+ros2 bag play \
+    ~/projects/data/bags/kitti-pc-demo \
+    --rate 0.5
+```
+
+---
+
 # 当前实现
 
 目前已实现：
@@ -85,6 +160,8 @@ ros2 run pointpillar_ros pointpillar_node
 - [x] PointPillars 推理
 - [x] pybind11 调用 Python 推理
 - [x] OpenPCDet 集成
+- [x] ros2bag 支持
+- [x] RViz 可视化
 
 ---
 
@@ -93,8 +170,6 @@ ros2 run pointpillar_ros pointpillar_node
 - [ ] TensorRT 部署
 - [ ] CUDA 后处理
 - [ ] 多线程推理
-- [ ] ros2bag 支持
-- [ ] RViz 可视化
 - [ ] CenterPoint 支持
 - [ ] BEVFusion 支持
 

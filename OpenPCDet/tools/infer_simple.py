@@ -68,8 +68,8 @@ class PointPillarInfer:
             self.dataset.set_pts(bin_path)
         data_dict = self.dataset[0]
         data_dict = self.dataset.collate_batch([data_dict])
-        print(data_dict['voxel_coords'].shape)
-        print(data_dict['voxel_coords'][:5])
+        # print(data_dict['voxel_coords'].shape)
+        # print(data_dict['voxel_coords'][:5])
         load_data_to_gpu(data_dict)
         with torch.no_grad():
             preds, _ = self.model(data_dict)

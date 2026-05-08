@@ -52,28 +52,28 @@ private:
         pc2.is_bigendian = false;
 
         sensor_msgs::PointCloud2Modifier modifier(pc2);
-        modifier.setPointCloud2FieldsByString(1, "xyz");
-        // modifier.setPointCloud2Fields(
-        //     4, 
-        //     "x", 1, sensor_msgs::msg::PointField::FLOAT32,
-        //     "y", 1, sensor_msgs::msg::PointField::FLOAT32,
-        //     "z", 1, sensor_msgs::msg::PointField::FLOAT32,
-        //     "intensity", 1, sensor_msgs::msg::PointField::FLOAT32
-        // );
+        // modifier.setPointCloud2FieldsByString(1, "xyz");
+        modifier.setPointCloud2Fields(
+            4, 
+            "x", 1, sensor_msgs::msg::PointField::FLOAT32,
+            "y", 1, sensor_msgs::msg::PointField::FLOAT32,
+            "z", 1, sensor_msgs::msg::PointField::FLOAT32,
+            "intensity", 1, sensor_msgs::msg::PointField::FLOAT32
+        );
 
         modifier.resize(num_points);
 
         sensor_msgs::PointCloud2Iterator<float> iter_x(pc2, "x");
         sensor_msgs::PointCloud2Iterator<float> iter_y(pc2, "y");
         sensor_msgs::PointCloud2Iterator<float> iter_z(pc2, "z");
-        // sensor_msgs::PointCloud2Iterator<float> iter_i(pc2, "intensity");
+        sensor_msgs::PointCloud2Iterator<float> iter_i(pc2, "intensity");
 
-        for (size_t i = 0; i < num_points; ++i, ++iter_x, ++iter_y, ++iter_z)
+        for (size_t i = 0; i < num_points; ++i, ++iter_x, ++iter_y, ++iter_z, ++iter_i)
         {
             *iter_x = data[i * 4 + 0];
             *iter_y = data[i * 4 + 1];
             *iter_z = data[i * 4 + 2];
-            // *iter_i = data[i * 4 + 3];
+            *iter_i = data[i * 4 + 3];
         }
 
         return pc2;
@@ -82,7 +82,7 @@ private:
     std::string get_path(int idx)
     {
         std::ostringstream oss;
-        oss << "/mnt/kitti/KITTI/testing/velodyne/"
+        oss << "/mnt/kitti/zjb_public_data/KITTI/testing/velodyne/"
             << std::setw(6) << std::setfill('0') << idx
             << ".bin";
         return oss.str();

@@ -207,6 +207,7 @@ private:
         visualization_msgs::msg::MarkerArray marker_array;
 
         // float z_offset = 1.7;
+        int final_num = 0;
 
         for (int i = 0; i < num; i++) 
         {
@@ -256,11 +257,13 @@ private:
             marker.color.a = 0.5;
 
             marker_array.markers.push_back(marker);
+
+            final_num++;
         }
 
         pub_->publish(marker_array);
 
-        std::cout << "publish: " << num << " boxes" << std::endl;
+        std::cout << "publish: " << final_num << " boxes" << std::endl;
     }
 
 };
